@@ -149,8 +149,37 @@ h1, h2, h3 {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
+/* ── Navbar link ── */
+.navbar-link:hover { color: var(--orange) !important; }
+
+/* ── Hamifleurs page ── */
+.hf-faq summary::-webkit-details-marker { display: none; }
+.hf-faq[open] > summary > span:last-child {
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+.hf-faq > summary > span:last-child {
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  .hf-hero-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 24px !important;
+    gap: 40px !important;
+  }
+  .hf-alerts-grid,
+  .hf-info-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 24px !important;
+  }
+  .hf-login-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
   .navbar-question {
     display: none;
   }

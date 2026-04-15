@@ -26,6 +26,14 @@ export const SOCIAL = {
   google: "https://share.google/hi6fepZGCJuXOdUVp",
 } as const;
 
+export const HAMIFLEURS = {
+  shopUrl: "https://www.hamifleurs.nl/",
+  loomEmbedUrl: "https://www.loom.com/embed/a0ad70323b0d479990b462824b2a9485",
+  loomShareUrl: "https://www.loom.com/share/a0ad70323b0d479990b462824b2a9485",
+  loomThumbnail:
+    "https://cdn.loom.com/sessions/thumbnails/a0ad70323b0d479990b462824b2a9485-1c946300abb7ee2f-full-play.gif",
+} as const;
+
 export const STRENGTHS = [
   {
     title: "Conoscenza del fiore",
