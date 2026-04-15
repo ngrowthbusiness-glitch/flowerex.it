@@ -149,8 +149,12 @@ h1, h2, h3 {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
-/* ── Navbar link ── */
-.navbar-link:hover { color: var(--orange) !important; }
+/* ── TopBar link ── */
+.topbar-link:hover { opacity: 1 !important; color: var(--orange-light) !important; }
+
+@media (max-width: 640px) {
+  .topbar-divider { display: none !important; }
+}
 
 /* ── Hamifleurs page ── */
 .hf-faq summary::-webkit-details-marker { display: none; }

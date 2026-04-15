@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import TopBar from "@/components/layout/TopBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { SITE } from "@/lib/constants";
@@ -45,6 +46,7 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-background text-foreground antialiased"
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
       >
+        <TopBar />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

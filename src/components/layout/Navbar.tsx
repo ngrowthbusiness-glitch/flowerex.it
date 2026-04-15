@@ -37,21 +37,6 @@ export default function Navbar() {
 
         {/* CTA with context */}
         <div className="flex items-center gap-3">
-          <Link
-            href="/hamifleurs"
-            className="navbar-link"
-            style={{
-              fontSize: "0.85rem",
-              fontWeight: 600,
-              color: "var(--text)",
-              textDecoration: "none",
-              padding: "6px 12px",
-              borderRadius: 8,
-              transition: "color 0.2s ease",
-            }}
-          >
-            Hamifleurs
-          </Link>
           <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }} className="navbar-question">
             Hai bisogno di ulteriori informazioni?
           </span>
