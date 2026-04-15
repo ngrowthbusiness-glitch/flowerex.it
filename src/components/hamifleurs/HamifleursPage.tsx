@@ -311,36 +311,79 @@ export default function HamifleursPage() {
                   { src: "/hamifleurs/login-1.png", caption: "1. Pagina di accesso" },
                   { src: "/hamifleurs/login-2.png", caption: "2. Inserisci le credenziali" },
                 ].map((img) => (
-                  <figure
+                  <a
                     key={img.src}
-                    style={{
-                      margin: 0,
-                      background: "var(--bg-white)",
-                      border: "1px solid var(--border)",
-                      borderRadius: 12,
-                      overflow: "hidden",
-                    }}
+                    href={img.src}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hf-login-thumb"
+                    aria-label={`${img.caption} — apri in dimensione intera`}
+                    style={{ textDecoration: "none", color: "inherit", display: "block" }}
                   >
-                    <div style={{ position: "relative", aspectRatio: "16 / 10" }}>
-                      <Image
-                        src={img.src}
-                        alt={img.caption}
-                        fill
-                        sizes="(max-width: 900px) 50vw, 300px"
-                        style={{ objectFit: "cover", objectPosition: "top" }}
-                      />
-                    </div>
-                    <figcaption
+                    <figure
                       style={{
-                        padding: "8px 12px",
-                        fontSize: "0.78rem",
-                        color: "var(--text-secondary)",
-                        borderTop: "1px solid var(--border)",
+                        margin: 0,
+                        background: "var(--bg-white)",
+                        border: "1px solid var(--border)",
+                        borderRadius: 12,
+                        overflow: "hidden",
+                        transition: "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
                       }}
                     >
-                      {img.caption}
-                    </figcaption>
-                  </figure>
+                      <div style={{ position: "relative", aspectRatio: "16 / 10" }}>
+                        <Image
+                          src={img.src}
+                          alt={img.caption}
+                          fill
+                          sizes="(max-width: 900px) 50vw, 300px"
+                          style={{ objectFit: "cover", objectPosition: "top" }}
+                        />
+                        <span
+                          aria-hidden
+                          className="hf-login-zoom"
+                          style={{
+                            position: "absolute",
+                            top: 8,
+                            right: 8,
+                            width: 28,
+                            height: 28,
+                            borderRadius: "50%",
+                            background: "rgba(26,26,26,0.75)",
+                            color: "#fff",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            opacity: 0,
+                            transition: "opacity 0.2s ease",
+                          }}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            <line x1="11" y1="8" x2="11" y2="14" />
+                            <line x1="8" y1="11" x2="14" y2="11" />
+                          </svg>
+                        </span>
+                      </div>
+                      <figcaption
+                        style={{
+                          padding: "8px 12px",
+                          fontSize: "0.78rem",
+                          color: "var(--text-secondary)",
+                          borderTop: "1px solid var(--border)",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          gap: 8,
+                        }}
+                      >
+                        <span>{img.caption}</span>
+                        <span style={{ color: "var(--orange)", fontWeight: 600, fontSize: "0.72rem" }}>
+                          Apri →
+                        </span>
+                      </figcaption>
+                    </figure>
+                  </a>
                 ))}
               </div>
             </div>
@@ -383,8 +426,8 @@ export default function HamifleursPage() {
 
       {/* ── INFO CARDS ── */}
       <section style={{ padding: "72px 0 48px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
-          <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <div className="hf-wrap">
+          <div className="hf-section-heading" style={{ textAlign: "center", marginBottom: 40 }}>
             <span
               style={{
                 fontSize: "0.75rem",
@@ -443,8 +486,9 @@ export default function HamifleursPage() {
 
       {/* ── CTA ── */}
       <section style={{ padding: "48px 0 64px" }} id="accedi">
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+        <div className="hf-wrap">
           <div
+            className="hf-cta-box"
             style={{
               background: "linear-gradient(135deg, var(--orange), var(--orange-light))",
               borderRadius: 24,
@@ -509,8 +553,8 @@ export default function HamifleursPage() {
 
       {/* ── FAQ ── */}
       <section style={{ padding: "32px 0 80px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
-          <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <div className="hf-wrap">
+          <div className="hf-section-heading" style={{ textAlign: "center", marginBottom: 40 }}>
             <span
               style={{
                 fontSize: "0.75rem",
@@ -577,7 +621,7 @@ export default function HamifleursPage() {
           textAlign: "center",
         }}
       >
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 48px" }}>
+        <div className="hf-wrap">
           <h3 style={{ fontSize: "1.2rem", fontWeight: 700, marginBottom: 8 }}>
             Dubbi prima di ordinare?
           </h3>

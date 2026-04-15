@@ -157,6 +157,12 @@ h1, h2, h3 {
 }
 
 /* ── Hamifleurs page ── */
+.hf-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
 .hf-faq summary::-webkit-details-marker { display: none; }
 .hf-faq[open] > summary > span:last-child {
   transform: rotate(45deg);
@@ -168,25 +174,53 @@ h1, h2, h3 {
   display: inline-block;
 }
 
+/* Login thumbnails: hover/focus interactions */
+.hf-login-thumb:hover figure,
+.hf-login-thumb:focus-visible figure {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-color: var(--orange-border) !important;
+}
+.hf-login-thumb:hover .hf-login-zoom,
+.hf-login-thumb:focus-visible .hf-login-zoom {
+  opacity: 1 !important;
+}
+.hf-login-thumb:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  /* Hamifleurs page */
+  .hf-wrap { padding: 0 20px !important; }
+
   .hf-hero-grid {
     grid-template-columns: 1fr !important;
-    padding: 0 24px !important;
+    padding: 0 20px !important;
     gap: 40px !important;
   }
-  .hf-alerts-grid,
+  .hf-alerts-grid {
+    grid-template-columns: 1fr !important;
+    padding: 0 20px !important;
+  }
   .hf-info-grid {
     grid-template-columns: 1fr !important;
-    padding: 0 24px !important;
   }
   .hf-login-grid {
     grid-template-columns: 1fr 1fr !important;
   }
-
-  .navbar-question {
-    display: none;
+  .hf-cta-box {
+    padding: 40px 24px !important;
+    border-radius: 18px !important;
   }
+  .hf-cta-box h2 { font-size: 1.5rem !important; }
+  .hf-cta-box p { font-size: 0.95rem !important; }
+  .hf-section-heading h2 { font-size: 1.6rem !important; }
+
+  /* Home */
+  .navbar-question { display: none; }
 
   .hero-grid {
     grid-template-columns: 1fr !important;
@@ -194,13 +228,13 @@ h1, h2, h3 {
     gap: 40px !important;
   }
 
-  .hero-grid .map-container {
-    min-height: 280px !important;
-  }
+  .hero-grid .map-container { min-height: 280px !important; }
 
-  .strengths-grid {
-    grid-template-columns: 1fr !important;
-  }
+  .strengths-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .hf-login-grid { grid-template-columns: 1fr !important; }
 }
 
 @media (max-width: 768px) {
