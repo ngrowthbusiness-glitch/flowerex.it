@@ -2,9 +2,41 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState, useRef, useEffect } from "react";
 import { CONTACT } from "@/lib/constants";
 
+const NAV_LINKS = [
+  {
+    label: "Come funziona",
+    href: null, // dropdown
+    children: [
+      {
+        label: "Tempi di consegna",
+        href: "/consegne",
+        description: "Quando fare l'ordine e quando aspettarti i fiori",
+      },
+      // future pages go here
+    ],
+  },
+];
+
 export default function Navbar() {
+  const pathname = usePathname();
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
   return (
     <nav
       className="sticky top-0 left-0 right-0 z-50 backdrop-blur-md"
@@ -17,6 +49,7 @@ export default function Navbar() {
       <div
         className="mx-auto h-full flex items-center justify-between"
         style={{ maxWidth: 1200, padding: "0 32px" }}
+        ref={dropdownRef}
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3" style={{ textDecoration: "none" }}>
@@ -35,9 +68,138 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* CTA with context */}
-        <div className="flex items-center gap-3">
-          <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }} className="navbar-question">
+        {/* Nav items + CTA */}
+        <div className="flex items-center gap-2">
+
+          {/* Dropdown links */}
+          {NAV_LINKS.map((item) => {
+            const isOpen = openDropdown === item.label;
+            const isActive = item.children?.some((c) => c.href === pathname);
+
+            return (
+              <div key={item.label} className="relative">
+                <button
+                  onClick={() => setOpenDropdown(isOpen ? null : item.label)}
+                  className="flex items-center gap-1.5"
+                  style={{
+                    padding: "8px 14px",
+                    borderRadius: 8,
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                    fontSize: "0.875rem",
+                    fontWeight: isActive ? 600 : 500,
+                    color: isActive ? "var(--orange)" : "var(--text-secondary)",
+                    transition: "all 0.15s",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) e.currentTarget.style.color = "var(--orange)";
+                    e.currentTarget.style.background = "var(--orange-dim)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) e.currentTarget.style.color = "var(--text-secondary)";
+                    e.currentTarget.style.background = "transparent";
+                  }}
+                >
+                  {item.label}
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    style={{
+                      transition: "transform 0.2s",
+                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+
+                {/* Dropdown panel */}
+                {isOpen && item.children && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "calc(100% + 8px)",
+                      left: 0,
+                      background: "var(--bg-white)",
+                      border: "1px solid var(--border)",
+                      borderRadius: 14,
+                      boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+                      minWidth: 260,
+                      padding: "6px",
+                      zIndex: 100,
+                    }}
+                  >
+                    {item.children.map((child) => {
+                      const childActive = pathname === child.href;
+                      return (
+                        <Link
+                          key={child.href}
+                          href={child.href!}
+                          onClick={() => setOpenDropdown(null)}
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            padding: "11px 14px",
+                            borderRadius: 10,
+                            textDecoration: "none",
+                            background: childActive ? "var(--orange-dim)" : "transparent",
+                            transition: "background 0.15s",
+                          }}
+                          onMouseEnter={(e) => {
+                            if (!childActive)
+                              e.currentTarget.style.background = "var(--orange-dim)";
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!childActive)
+                              e.currentTarget.style.background = "transparent";
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: "0.875rem",
+                              fontWeight: 600,
+                              color: childActive ? "var(--orange)" : "var(--text)",
+                            }}
+                          >
+                            {child.label}
+                          </span>
+                          {child.description && (
+                            <span
+                              style={{
+                                fontSize: "0.75rem",
+                                color: "var(--text-secondary)",
+                                marginTop: 2,
+                              }}
+                            >
+                              {child.description}
+                            </span>
+                          )}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+          {/* Divider */}
+          <div
+            style={{ width: 1, height: 20, background: "var(--border)", margin: "0 4px" }}
+          />
+
+          {/* WhatsApp CTA */}
+          <span
+            style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}
+            className="navbar-question"
+          >
             Hai bisogno di ulteriori informazioni?
           </span>
           <a

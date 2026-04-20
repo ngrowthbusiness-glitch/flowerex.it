@@ -192,6 +192,35 @@ h1, h2, h3 {
 }
 
 /* ── Responsive ── */
+/* ── Consegne page ── */
+.consegne-tabs {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.consegne-disclaimer-grid {
+  grid-template-columns: auto 1fr;
+}
+
+@media (max-width: 900px) {
+  /* Consegne page */
+  .consegne-disclaimer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .delivery-teaser-label { display: none; }
+  .delivery-teaser { padding: 20px 20px !important; }
+  .consegne-tabs {
+    flex-direction: column;
+    width: calc(100vw - 40px);
+  }
+  .consegne-sudamerica > div {
+    padding: 24px 20px !important;
+  }
+}
+
 @media (max-width: 900px) {
   /* Hamifleurs page */
   .hf-wrap { padding: 0 20px !important; }
