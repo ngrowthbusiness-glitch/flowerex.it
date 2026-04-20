@@ -192,95 +192,57 @@ h1, h2, h3 {
 }
 
 /* ── Responsive ── */
+/* ── Navbar ── */
+.nav-desktop  { display: flex; }
+.nav-mobile-toggle { display: none !important; }
+.nav-logo-text { font-size: 1rem; }
+
 /* ── Consegne page ── */
-.consegne-tabs {
-  flex-wrap: wrap;
-  justify-content: center;
+.consegne-tabs { flex-wrap: wrap; justify-content: center; }
+.consegne-disclaimer-grid { grid-template-columns: auto 1fr; }
+
+/* ── Page padding helper ── */
+.page-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
 }
 
-.consegne-disclaimer-grid {
-  grid-template-columns: auto 1fr;
-}
-
-@media (max-width: 900px) {
-  /* Consegne page */
-  .consegne-disclaimer-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
+/* ════════════════════════════════════════════
+   MOBILE  ≤ 640px
+════════════════════════════════════════════ */
 @media (max-width: 640px) {
+  /* Navbar: hamburger mode */
+  .nav-desktop         { display: none !important; }
+  .nav-mobile-toggle   { display: flex !important; }
+  .nav-logo-text       { font-size: 0.88rem; }
+
+  /* Global padding: meno respiro laterale */
+  .page-section { padding: 0 16px !important; }
+
+  /* Hero */
+  .hero-grid {
+    padding: 32px 16px 24px !important;
+    gap: 28px !important;
+  }
+
+  /* Delivery teaser (home) */
   .delivery-teaser-label { display: none; }
-  .delivery-teaser { padding: 20px 20px !important; }
-  .consegne-tabs {
-    flex-direction: column;
-    width: calc(100vw - 40px);
-  }
-  .consegne-sudamerica > div {
-    padding: 24px 20px !important;
-  }
+  .delivery-teaser       { padding: 16px !important; }
+
+  /* Consegne page */
+  .consegne-page-wrap    { padding: 0 16px !important; }
+  .consegne-hero         { padding: 44px 16px 32px !important; }
+  .consegne-tabs-wrap    { padding: 0 16px !important; }
+  .consegne-tabs         { flex-direction: column; width: 100%; }
+  .consegne-tabs button  { justify-content: center; }
+  .consegne-disclaimer-grid { grid-template-columns: 1fr !important; }
+  .consegne-sudamerica > div { padding: 20px 16px !important; }
+  .consegne-cta          { padding: 40px 16px 56px !important; }
+
+  /* Timeline: scroll orizzontale su schermi piccoli */
+  .timeline-scroll-wrap  { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .timeline-inner        { min-width: 560px; }
 }
 
-@media (max-width: 900px) {
-  /* Hamifleurs page */
-  .hf-wrap { padding: 0 20px !important; }
-
-  .hf-hero-grid {
-    grid-template-columns: 1fr !important;
-    padding: 0 20px !important;
-    gap: 40px !important;
-  }
-  .hf-alerts-grid {
-    grid-template-columns: 1fr !important;
-    padding: 0 20px !important;
-  }
-  .hf-info-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .hf-login-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-  .hf-cta-box {
-    padding: 40px 24px !important;
-    border-radius: 18px !important;
-  }
-  .hf-cta-box h2 { font-size: 1.5rem !important; }
-  .hf-cta-box p { font-size: 0.95rem !important; }
-  .hf-section-heading h2 { font-size: 1.6rem !important; }
-
-  /* Home */
-  .navbar-question { display: none; }
-
-  .hero-grid {
-    grid-template-columns: 1fr !important;
-    padding: 40px 24px 32px !important;
-    gap: 40px !important;
-  }
-
-  .hero-grid .map-container { min-height: 280px !important; }
-
-  .strengths-grid { grid-template-columns: 1fr !important; }
-}
-
-@media (max-width: 480px) {
-  .hf-login-grid { grid-template-columns: 1fr !important; }
-}
-
-@media (max-width: 768px) {
-  .hero-grid {
-    padding: 32px 20px 24px !important;
-    gap: 32px !important;
-  }
-
-  .strengths-grid {
-    padding: 0 !important;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    padding: 12px 24px;
-    font-size: 0.9rem;
-    width: 100%;
-    justify-content: center;
-  }
-}
+/* ═════�
