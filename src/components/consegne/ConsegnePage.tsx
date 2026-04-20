@@ -51,12 +51,20 @@ export default function ConsegnePage() {
           className="consegne-tabs"
           style={{ display: "inline-flex", background: "var(--bg-white)", border: "1px solid var(--border)", borderRadius: 14, padding: 5, gap: 4, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
         >
-          <TabBtn active={scenario === "weekend"} onClick={() => setScenario("weekend")}>
+          <TabBtn active={scenario === "weekend"} onClick={() => setScenario("weekend")} recommended>
             Venerdì · Sabato · Domenica
           </TabBtn>
           <TabBtn active={scenario === "weekstart"} onClick={() => setScenario("weekstart")}>
             Lunedì · Martedì · Mercoledì · Giovedì
           </TabBtn>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 10 }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+          </svg>
+          <span style={{ fontSize: "0.75rem", color: "var(--text-secondary)", fontStyle: "italic" }}>
+            di solito gli eventi ricadono qui
+          </span>
         </div>
       </div>
 
@@ -146,24 +154,46 @@ export default function ConsegnePage() {
 
 /* ── Sub-components ─────────────────────────────────────────── */
 
-function TabBtn({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
+function TabBtn({ active, onClick, recommended, children }: { active: boolean; onClick: () => void; recommended?: boolean; children: React.ReactNode }) {
+  const showGlow = recommended && active === false;
   return (
-    <button
-      onClick={onClick}
-      style={{
-        display: "flex", alignItems: "center", padding: "13px 22px",
-        borderRadius: 10, border: "none", cursor: "pointer",
-        fontSize: "0.9rem", fontWeight: active ? 600 : 500,
-        color: active ? "#fff" : "var(--text-secondary)",
-        background: active ? "var(--orange)" : "transparent",
-        boxShadow: active ? "0 4px 16px rgba(232,100,44,0.25)" : "none",
-        transition: "all 0.2s",
-      }}
-      onMouseEnter={(e) => { if (!active) { e.currentTarget.style.color = "var(--orange)"; e.currentTarget.style.background = "var(--orange-dim)"; } }}
-      onMouseLeave={(e) => { if (!active) { e.currentTarget.style.color = "var(--text-secondary)"; e.currentTarget.style.background = "transparent"; } }}
-    >
-      {children}
-    </button>
+    <div style={{ position: "relative", display: "inline-flex", flexDirection: "column", alignItems: "center" }}>
+      {recommended && (
+        <div style={{
+          position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)",
+          display: "inline-flex", alignItems: "center", gap: 4,
+          padding: "2px 10px", borderRadius: 999,
+          background: "var(--orange)", color: "#fff",
+          fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.06em",
+          whiteSpace: "nowrap", zIndex: 2,
+          boxShadow: "0 2px 8px rgba(232,100,44,0.30)",
+        }}>
+          Piu scelto
+        </div>
+      )}
+      <button
+        onClick={onClick}
+        style={{
+          display: "flex", alignItems: "center", padding: "13px 22px",
+          borderRadius: 10, cursor: "pointer",
+          fontSize: "0.9rem", fontWeight: active ? 600 : 500,
+          color: active ? "#fff" : showGlow ? "var(--orange)" : "var(--text-secondary)",
+          background: active ? "var(--orange)" : showGlow ? "var(--orange-dim)" : "transparent",
+          border: showGlow ? "1.5px dashed var(--orange-border)" : "1.5px solid transparent",
+          boxShadow: active ? "0 4px 16px rgba(232,100,44,0.25)" : "none",
+          transition: "all 0.2s",
+        }}
+        onMouseEnter={(e) => { if (active === false) { e.currentTarget.style.color = "var(--orange)"; e.currentTarget.style.background = "var(--orange-dim)"; } }}
+        onMouseLeave={(e) => {
+          if (active === false) {
+            e.currentTarget.style.color = showGlow ? "var(--orange)" : "var(--text-secondary)";
+            e.currentTarget.style.background = showGlow ? "var(--orange-dim)" : "transparent";
+          }
+        }}
+      >
+        {children}
+      </button>
+    </div>
   );
 }
 

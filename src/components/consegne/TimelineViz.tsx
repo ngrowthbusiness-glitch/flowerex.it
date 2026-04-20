@@ -25,22 +25,23 @@ function TlItem({
 }) {
   const dot = DOT[type];
   return (
-    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", minWidth: 100, position: "relative" }}>
+    <div className="tl-item" style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", minWidth: 100, position: "relative" }}>
       {isLast === false && (
-        <div style={{
+        <div className="tl-connector" style={{
           position: "absolute", top: 20, left: "50%", width: "100%",
           height: 2, background: "var(--border)", zIndex: 0,
         }} />
       )}
-      <div style={{
+      <div className="tl-dot" style={{
         width: 40, height: 40, borderRadius: "50%",
         display: "flex", alignItems: "center", justifyContent: "center",
         fontSize: "1.1rem", position: "relative", zIndex: 1,
         border: `2px solid ${dot.border}`, background: dot.bg,
+        flexShrink: 0,
       }}>
         {emoji}
       </div>
-      <div style={{
+      <div className="tl-label" style={{
         marginTop: 12, textAlign: "center",
         ...(highlight ? {
           background: "var(--orange-dim)",
@@ -64,7 +65,7 @@ function TlItem({
 
 function WeekSep() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "8px 8px 0", minWidth: 36 }}>
+    <div className="tl-weeksep" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "8px 8px 0", minWidth: 36 }}>
       <div style={{ width: 2, height: 48, background: "var(--border)", borderRadius: 2 }} />
       <div style={{ writingMode: "vertical-rl" as const, transform: "rotate(180deg)", fontSize: "0.6rem", fontWeight: 700, color: "var(--text-faint)", letterSpacing: "0.1em", textTransform: "uppercase" as const, marginTop: 8 }}>
         nuova sett.
@@ -90,7 +91,7 @@ function Legend({ items }: { items: LegendItem[] }) {
 
 function TimelineCard({ title, children, legend }: { title: string; children: React.ReactNode; legend: LegendItem[] }) {
   return (
-    <div style={{
+    <div className="tl-card-inner" style={{
       background: "var(--bg-white)", border: "1px solid var(--border)",
       borderRadius: 20, padding: "40px 48px", marginBottom: 24,
       boxShadow: "0 2px 16px rgba(0,0,0,0.04)",
@@ -99,7 +100,7 @@ function TimelineCard({ title, children, legend }: { title: string; children: Re
         <div style={{ width: 4, height: 18, background: "var(--orange)", borderRadius: 2, flexShrink: 0 }} />
         {title}
       </div>
-      <div style={{ display: "flex", gap: 0, alignItems: "flex-start", overflowX: "auto" as const, paddingBottom: 8 }}>
+      <div className="tl-row" style={{ display: "flex", gap: 0, alignItems: "flex-start", overflowX: "auto" as const, paddingBottom: 8 }}>
         {children}
       </div>
       <Legend items={legend} />
@@ -116,13 +117,13 @@ function TimelineWeekend() {
     { type: "event",    label: "Il tuo evento" },
   ];
   return (
-    <TimelineCard title="Timeline — settimana tipo (evento venerdì → domenica)" legend={legend}>
-      <TlItem type="order"    emoji="📋" day="Lunedì"           name="Finestra ordine aperta" time="dalle 14:00 ✅ consigliato" highlight />
-      <TlItem type="order"    emoji="⏱️"  day="Martedì"          name="Deadline ordine"        time="entro le 12:00" />
-      <TlItem type="transit"  emoji="🚛" day="Martedì"          name="Partenza camion"         time="~16:00 · dall'Olanda" />
-      <TlItem type="arrive"   emoji="📦" day="Mer → Gio"        name="Arrivo in magazzino"    time="mer 16:00 – gio 6:00" />
-      <TlItem type="delivery" emoji="🌷" day="Giovedì · Venerdì" name="Consegna / ritiro"       time="gio mattina o ven mattina" />
-      <TlItem type="event"    emoji="🎉" day="Ven · Sab · Dom"  name="Il tuo evento"           time="fiori freschi pronti" isLast />
+    <TimelineCard title="Timeline - settimana tipo (evento venerdi, sabato o domenica)" legend={legend}>
+      <TlItem type="order"    emoji="📋" day="Lunedi"            name="Finestra ordine aperta" time="dalle 14:00 - consigliato" highlight />
+      <TlItem type="order"    emoji="⏱️"  day="Martedi"           name="Deadline ordine"        time="entro le 12:00" />
+      <TlItem type="transit"  emoji="🚛" day="Martedi"           name="Partenza camion"         time="~16:00 - dall'Olanda" />
+      <TlItem type="arrive"   emoji="📦" day="Mer → Gio"         name="Arrivo in magazzino"    time="mer 16:00 - gio 6:00" />
+      <TlItem type="delivery" emoji="🌷" day="Giovedi · Venerdi" name="Consegna / ritiro"       time="gio mattina o ven mattina" />
+      <TlItem type="event"    emoji="🎉" day="Ven · Sab · Dom"   name="Il tuo evento"           time="fiori freschi pronti" isLast />
     </TimelineCard>
   );
 }
@@ -136,13 +137,13 @@ function TimelineWeekstart() {
     { type: "event",    label: "Il tuo evento" },
   ];
   return (
-    <TimelineCard title="Timeline — 2 settimane (evento lunedì → giovedì)" legend={legend}>
-      <TlItem type="preorder" emoji="📋" day="Gio precedente" name="Ordine da fare"    time="settimana -1 ✅" highlight />
+    <TimelineCard title="Timeline - 2 settimane (evento lunedi → giovedi)" legend={legend}>
+      <TlItem type="preorder" emoji="📋" day="Gio precedente" name="Ordine da fare"    time="settimana -1 - consigliato" highlight />
       <TlItem type="transit"  emoji="🚛" day="Gio / Ven"      name="Partenza camion"   time="dall'Olanda" />
-      <TlItem type="arrive"   emoji="📦" day="Sab · Dom"     name="Arrivo + cella"    time="conservati per te" />
+      <TlItem type="arrive"   emoji="📦" day="Sab · Dom"      name="Arrivo + cella"    time="conservati per te" />
       <WeekSep />
-      <TlItem type="delivery" emoji="🌷" day="Lun · Mar"     name="Consegna / ritiro" time="su richiesta" />
-      <TlItem type="event"    emoji="🎉" day="Lun → Gio"     name="Il tuo evento"    time="fiori freschi pronti" isLast />
+      <TlItem type="delivery" emoji="🌷" day="Lun · Mar"      name="Consegna / ritiro" time="su richiesta" />
+      <TlItem type="event"    emoji="🎉" day="Lun → Gio"      name="Il tuo evento"    time="fiori freschi pronti" isLast />
     </TimelineCard>
   );
 }

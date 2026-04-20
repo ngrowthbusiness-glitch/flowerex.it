@@ -314,3 +314,39 @@ h1, h2, h3 {
     justify-content: center;
   }
 }
+/* -- Timeline mobile: vertical layout -- */
+@media (max-width: 640px) {
+  .tl-row {
+    flex-direction: column !important;
+    overflow-x: visible !important;
+    padding-bottom: 0 !important;
+    gap: 0 !important;
+    align-items: stretch !important;
+  }
+  .tl-item {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    min-width: 100% !important;
+    padding-bottom: 24px !important;
+    gap: 16px;
+  }
+  .tl-connector {
+    top: 40px !important;
+    left: 19px !important;
+    width: 2px !important;
+    height: calc(100% - 40px) !important;
+  }
+  .tl-dot {
+    flex-shrink: 0 !important;
+  }
+  .tl-label {
+    text-align: left !important;
+    margin-top: 0 !important;
+  }
+  .tl-weeksep {
+    display: none !important;
+  }
+  .tl-card-inner {
+    padding: 24px 16px !important;
+  }
+}
