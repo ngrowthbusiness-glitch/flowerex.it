@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 export default function DeliveryTeaser() {
@@ -56,7 +58,6 @@ export default function DeliveryTeaser() {
                 flexShrink: 0,
               }}
             >
-              {/* Clock icon */}
               <svg
                 width="22"
                 height="22"
