@@ -147,7 +147,7 @@ export async function POST(req: NextRequest) {
   const products: CalcolatoreProduct[] = parsedProducts.map((p) => {
     const cost = Number(p.unitCost) || 0;
     const qty = Number(p.qty) || 1;
-    const unitPrice = cost * (1 + marginPercent / 100) + marginFixed;
+    const unitPrice = (cost + marginFixed) * (1 + marginPercent / 100);
     const totalCost = qty * cost;
     const totalPrice = qty * unitPrice;
     return {

@@ -304,7 +304,7 @@ export default function CalcolatoreClient() {
                 </div>
                 <div style={{ gridColumn: "1 / -1" }}>
                   <p style={{ fontSize: "0.78rem", color: "var(--text-faint)", margin: 0 }}>
-                    Formula: <code style={{ background: "var(--border)", padding: "2px 6px", borderRadius: 4 }}>prezzo_cliente = costo × (1 + %/100) + €fisso</code>
+                    Formula: <code style={{ background: "var(--border)", padding: "2px 6px", borderRadius: 4 }}>(costo + €fisso) × (1 + %/100)</code>
                   </p>
                 </div>
               </div>
